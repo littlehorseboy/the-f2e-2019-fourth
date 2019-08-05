@@ -1,6 +1,5 @@
 import React from 'react';
-import { HashRouter, Route, match } from 'react-router-dom';
-import H from 'history';
+import { HashRouter, Route } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Main from '../pages/Main/Main';
 
@@ -23,25 +22,6 @@ const useStyles = makeStyles({
   },
 });
 
-export interface RouteComponentProps<P> {
-  match: match<P>;
-  loaction: H.Location;
-  history: H.History;
-  staticContext?: any; // eslint-disable-line @typescript-eslint/no-explicit-any
-}
-
-export interface Match<P> {
-  params: P;
-  isExact: boolean;
-  path: string;
-  url: string;
-}
-
-export interface MatchLocationProps {
-  match: Match<object> | null;
-  location: H.Location;
-}
-
 export default function Router(): JSX.Element {
   const classes = useStyles();
 
@@ -50,6 +30,7 @@ export default function Router(): JSX.Element {
       <div className={classes.page}>
         <Route path='/' exact component={Main} />
         <Route path='/payment' component={Main} />
+        <Route path='/payment/:type' component={Main} />
       </div>
     </HashRouter>
   );
