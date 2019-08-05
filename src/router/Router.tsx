@@ -1,13 +1,8 @@
 import React from 'react';
-import { CSSTransition } from 'react-transition-group';
 import { HashRouter, Route, match } from 'react-router-dom';
 import H from 'history';
 import { makeStyles } from '@material-ui/core/styles';
 import Main from '../pages/Main/Main';
-
-const routes = [
-  { path: '/', Component: Main },
-];
 
 const useStyles = makeStyles({
   page: {
@@ -52,22 +47,10 @@ export default function Router(): JSX.Element {
 
   return (
     <HashRouter>
-      {routes.map(({ path, Component }): JSX.Element => (
-        <Route key={path} exact path={path}>
-          {(routeProps): JSX.Element => (
-            <CSSTransition
-              in={routeProps.match != null}
-              timeout={300}
-              classNames={classes.page}
-              unmountOnExit
-            >
-              <div className={classes.page}>
-                <Component match={routeProps.match} location={routeProps.location} />
-              </div>
-            </CSSTransition>
-          )}
-        </Route>
-      ))}
+      <div className={classes.page}>
+        <Route path='/' exact component={Main} />
+        <Route path='/payment' component={Main} />
+      </div>
     </HashRouter>
   );
 }
