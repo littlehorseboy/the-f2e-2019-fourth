@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import Main from '../pages/Main/Main';
+import PaymentPage from '../pages/PaymentPage/PaymentPage';
 
 const useStyles = makeStyles({
   page: {
@@ -28,9 +28,9 @@ export default function Router(): JSX.Element {
   return (
     <HashRouter>
       <div className={classes.page}>
-        <Route path='/' exact component={Main} />
-        <Route path='/payment' component={Main} />
-        <Route path='/payment/:type' component={Main} />
+        <Route path='/' exact component={PaymentPage} />
+        <Route path='/payment/:type' component={PaymentPage} />
+        <Route path='/payment' exact component={PaymentPage} />
       </div>
     </HashRouter>
   );
