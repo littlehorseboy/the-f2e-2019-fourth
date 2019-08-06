@@ -2,7 +2,8 @@ import React from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import PaymentRouter from './PaymentRouter/PaymentRouter';
-import PaymentPage from '../pages/PaymentPage/PaymentPage';
+import PaymentCreditCard from '../pages/PaymentCreditCard/PaymentCreditCard';
+import PaymentCreditCardSuccessful from '../pages/PaymentCreditCardSuccessful/PaymentCreditCardSuccessful';
 
 const useStyles = makeStyles({
   page: {
@@ -16,7 +17,8 @@ export default function Router(): JSX.Element {
   return (
     <HashRouter>
       <div className={classes.page}>
-        <Route exact path='/' component={PaymentPage} />
+        <Route exact path='/' component={PaymentCreditCard} />
+        <Route path='/successful/payment/creditCard' component={PaymentCreditCardSuccessful} />
         <Route path='/payment' component={PaymentRouter} />
       </div>
     </HashRouter>

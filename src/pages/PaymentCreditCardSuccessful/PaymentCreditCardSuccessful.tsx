@@ -1,44 +1,21 @@
 import React from 'react';
 import {
   HashRouter,
-  Route,
   Link,
   RouteComponentProps,
 } from 'react-router-dom';
 import classNames from 'classnames';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
-import { CSSTransition } from 'react-transition-group';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import PaymentCreditCard from '../../pages/PaymentCreditCard/PaymentCreditCard';
 
 const bannerImg = require('../../assets/images/Photo by Xianjuan HU on Unsplash.png'); // eslint-disable-line @typescript-eslint/no-var-requires
 const brandImg = require('../../assets/images/Group 167.png'); // eslint-disable-line @typescript-eslint/no-var-requires
 
-const routes = [
-  { path: '/payment/creditCard', name: 'paymentCreditCard', Component: PaymentCreditCard },
-  { path: '/payment/atm', name: 'paymentCreditCard', Component: PaymentCreditCard },
-];
-
-const useStyles = makeStyles((theme): Record<'fade' | 'root' | 'leftPanel' | 'leftPanelWrapper'
+const useStyles = makeStyles((theme): Record<'root' | 'leftPanel' | 'leftPanelWrapper'
 | 'bannerImg' | 'titleContent' | 'fieldName' | 'fieldValue' | 'paymentAmountContainer' | 'paymentAmount'
 | 'paymentTypeContainer' | 'paymentType' | 'imgContainer', CSSProperties | (() => CSSProperties)> => createStyles({
-  fade: {
-    transition: 'opacity 0.7s ease-in',
-    '&-enter': {
-      opacity: 0,
-    },
-    '&-enter-done': {
-      opacity: 1,
-    },
-    '&-exit': {
-      opacity: 1,
-    },
-    '&-exit-done': {
-      opacity: 0,
-    },
-  },
   root: {
     width: '100%',
     minHeight: '100vh',
@@ -53,6 +30,10 @@ const useStyles = makeStyles((theme): Record<'fade' | 'root' | 'leftPanel' | 'le
   },
   bannerImg: {
     width: '100%',
+    height: 339,
+    backgroundImage: `url('${bannerImg}')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
   },
   titleContent: {
     fontSize: 40,
@@ -147,8 +128,8 @@ export default function Router(props: RouteComponentProps): JSX.Element {
       <div className={classes.root}>
         <Container>
           <Grid container>
-            <Grid item xs={12} sm={5} className={classes.leftPanel}>
-              <img src={bannerImg} alt="payment" className={classes.bannerImg} />
+            <Grid item xs={12} sm={12} className={classes.leftPanel}>
+              <div className={classes.bannerImg}></div>
 
               <div className={classes.leftPanelWrapper}>
                 <div className={classes.titleContent}>訂單資訊</div>
@@ -192,28 +173,6 @@ export default function Router(props: RouteComponentProps): JSX.Element {
               <div className={classes.imgContainer}>
                 <img src={brandImg} alt="payment" />
               </div>
-            </Grid>
-
-            <Grid item xs={12} sm={7}>
-              {routes.map(({ path, Component }): JSX.Element => (
-                <Route key={path} exact path={path}>
-                  {({ match }): JSX.Element => (
-                    <CSSTransition
-                      in={match !== null}
-                      timeout={{
-                        enter: 400,
-                        exit: 300,
-                      }}
-                      classNames={classes.fade}
-                      unmountOnExit
-                    >
-                      <div className={classes.fade}>
-                        <Component />
-                      </div>
-                    </CSSTransition>
-                  )}
-                </Route>
-              ))}
             </Grid>
           </Grid>
         </Container>
