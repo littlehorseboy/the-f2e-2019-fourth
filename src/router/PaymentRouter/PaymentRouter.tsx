@@ -1,6 +1,13 @@
 import React from 'react';
-import { HashRouter, Route } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import {
+  HashRouter,
+  Route,
+  Link,
+  RouteComponentProps,
+} from 'react-router-dom';
+import classNames from 'classnames';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import { CSSTransition } from 'react-transition-group';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -14,7 +21,24 @@ const routes = [
   { path: '/payment/atm', name: 'paymentCreditCard', Component: PaymentPage },
 ];
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme): Record<'fade' | 'root' | 'leftPanel' | 'leftPanelWrapper'
+| 'bannerImg' | 'titleContent' | 'fieldName' | 'fieldValue' | 'paymentAmountContainer' | 'paymentAmount'
+| 'paymentTypeContainer' | 'paymentType' | 'imgContainer', CSSProperties | (() => CSSProperties)> => createStyles({
+  fade: {
+    transition: 'opacity 0.7s ease-in',
+    '&-enter': {
+      opacity: 0,
+    },
+    '&-enter-done': {
+      opacity: 1,
+    },
+    '&-exit': {
+      opacity: 1,
+    },
+    '&-exit-done': {
+      opacity: 0,
+    },
+  },
   root: {
     width: '100%',
     minHeight: '100vh',
@@ -45,24 +69,77 @@ const useStyles = makeStyles({
     fontWeight: 'lighter',
     paddingBottom: 16,
   },
-  fade: {
-    transition: 'opacity 0.7s ease-in',
-    '&-enter': {
-      opacity: 0,
+  paymentAmountContainer: {
+    paddingTop: 16,
+    paddingBottom: 16,
+  },
+  paymentAmount: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingRight: 64,
+    [theme.breakpoints.down('sm')]: {
+      paddingRight: 0,
     },
-    '&-enter-done': {
-      opacity: 1,
+    '& > span:nth-child(1)': {
+      fontSize: 36,
+      fontWeight: 'bold',
+      paddingRight: 16,
     },
-    '&-exit': {
-      opacity: 1,
-    },
-    '&-exit-done': {
-      opacity: 0,
+    '& > span:nth-child(2)': {
+      fontSize: 24,
     },
   },
-});
+  paymentTypeContainer: {
+    paddingTop: 16,
+    paddingBottom: 16,
+  },
+  paymentType: {
+    '& > div': {
+      height: 90,
+      marginBottom: 16,
+      marginRight: 48,
+      paddingLeft: 32,
+      backgroundColor: '#F0F0F0',
+      [theme.breakpoints.down('sm')]: {
+        marginRight: 0,
+      },
+      '&.active': {
+        marginRight: 0,
+        backgroundColor: '#343434',
+        '& > a': {
+          color: '#FFFFFF',
+        },
+      },
+      '& > a': {
+        display: 'flex',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        width: '100%',
+        height: '100%',
+        color: '#707070',
+        textDecoration: 'none',
+      },
+      '& > a:hover': {
+        textDecoration: 'underline',
+      },
+      '& > a > span:nth-child(1)': {
+        fontSize: 28,
+      },
+      '& > a > span:nth-child(2)': {
+        paddingLeft: 16,
+        fontSize: 12,
+      },
+    },
+  },
+  imgContainer: {
+    paddingTop: 48,
+    paddingLeft: 48,
+    paddingBottom: 24,
+  },
+}));
 
-export default function Router(): JSX.Element {
+export default function Router(props: RouteComponentProps): JSX.Element {
   const classes = useStyles();
 
   return (
@@ -79,26 +156,42 @@ export default function Router(): JSX.Element {
                 <div className={classes.fieldValue}>Amazing 3C online Shop</div>
                 <div className={classes.fieldName}>訂單編號</div>
                 <div className={classes.fieldValue}>239234dwnd321</div>
-                <div>本筆訂單將支付</div>
-                <div>239234dwnd321</div>
-                <div>
-                  {(1250).toLocaleString()}
-                  <span>元</span>
+
+                <div className={classes.paymentAmountContainer}>
+                  <div className={classes.fieldName}>本筆訂單將支付</div>
+                  <div className={classes.paymentAmount}>
+                    <span>{(1250).toLocaleString()}</span>
+                    <span>元</span>
+                  </div>
                 </div>
-                <div>支付方式</div>
-                <div>信用卡</div>
-                <div>
-                  <span>網路ATM</span>
-                  <span>(晶片讀卡機轉帳)</span>
+
+                <div className={classes.paymentTypeContainer}>
+                  <div className={classes.fieldName}>支付方式</div>
+                  <div className={classes.paymentType}>
+                    <div className={classNames({ active: props.location.pathname === '/payment/creditCard' })}>
+                      <Link to="/payment/creditCard">
+                        <span>信用卡</span>
+                      </Link>
+                    </div>
+                    <div className={classNames({ active: props.location.pathname === '/payment/atm' })}>
+                      <Link to="/payment/atm">
+                        <span>網路ATM</span>
+                        <span>(晶片讀卡機轉帳)</span>
+                      </Link>
+                    </div>
+                    <div className={classNames({ active: props.location.pathname === '/payment/entity' })}>
+                      <Link to="/payment/entity">
+                        <span>ATM櫃員機</span>
+                        <span>(實體ATM及網銀)</span>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <span>ATM櫃員機</span>
-                  <span>(實體ATM及網銀)</span>
-                </div>
-                <div>信用卡</div>
               </div>
 
-              <img src={brandImg} alt="payment" />
+              <div className={classes.imgContainer}>
+                <img src={brandImg} alt="payment" />
+              </div>
             </Grid>
 
             <Grid item xs={12} sm={7}>
