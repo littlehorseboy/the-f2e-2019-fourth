@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
+import H from 'history';
 import MaskedInput from 'react-text-mask';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
@@ -132,7 +134,11 @@ interface FormFieldsErrorMessage {
   cellPhoneNumber: string[];
 }
 
-export default function PaymentCreditCard(): JSX.Element {
+interface PropsI {
+  history: H.History;
+}
+
+function PaymentCreditCard(props: PropsI): JSX.Element {
   const classes = useStyles();
 
   // 信用卡開頭號碼 0 不代表任何信用卡 就是一個預設值
@@ -157,7 +163,7 @@ export default function PaymentCreditCard(): JSX.Element {
     cellPhoneNumber: [],
   });
 
-  const handleFormSubmit = (): void => {
+  const handleFormSubmit = (isFormSubmit = false): void => {
     let name: string[] = [];
     if (formFields.name === '') {
       name = [...name, '必填欄位'];
@@ -204,6 +210,15 @@ export default function PaymentCreditCard(): JSX.Element {
 
     if (!checkStatus) {
       setCheckStatus(true);
+    }
+
+    if (isFormSubmit) {
+      if (
+        (name.length + creditCardNumber.length + MMYY.length
+          + securityCode.length + cellPhoneNumber.length) === 0
+      ) {
+        props.history.push('/successful/payment/creditCard');
+      }
     }
   };
 
@@ -351,7 +366,7 @@ export default function PaymentCreditCard(): JSX.Element {
             variant="contained"
             color="primary"
             className={classes.button}
-            onClick={handleFormSubmit}
+            onClick={(): void => handleFormSubmit(true)}
           >
             確認付款
           </Button>
@@ -360,3 +375,5 @@ export default function PaymentCreditCard(): JSX.Element {
     </div>
   );
 }
+
+export default withRouter(PaymentCreditCard);

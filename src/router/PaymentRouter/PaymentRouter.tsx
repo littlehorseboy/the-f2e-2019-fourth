@@ -12,13 +12,14 @@ import { CSSTransition } from 'react-transition-group';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import PaymentCreditCard from '../../pages/PaymentCreditCard/PaymentCreditCard';
+import PaymentAtm from '../../pages/PaymentAtm/PaymentAtm';
 
 const bannerImg = require('../../assets/images/Photo by Xianjuan HU on Unsplash.png'); // eslint-disable-line @typescript-eslint/no-var-requires
 const brandImg = require('../../assets/images/Group 167.png'); // eslint-disable-line @typescript-eslint/no-var-requires
 
 const routes = [
   { path: '/payment/creditCard', name: 'paymentCreditCard', Component: PaymentCreditCard },
-  { path: '/payment/atm', name: 'paymentCreditCard', Component: PaymentCreditCard },
+  { path: '/payment/atm', name: 'PaymentAtm', Component: PaymentAtm },
 ];
 
 const useStyles = makeStyles((theme): Record<'fade' | 'root' | 'leftPanel' | 'leftPanelWrapper'
@@ -201,8 +202,8 @@ export default function Router(props: RouteComponentProps): JSX.Element {
                     <CSSTransition
                       in={match !== null}
                       timeout={{
-                        enter: 500,
-                        exit: 300,
+                        enter: 300,
+                        exit: 100,
                       }}
                       classNames={classes.fade}
                       unmountOnExit

@@ -1,32 +1,23 @@
 import React from 'react';
-import {
-  HashRouter,
-  Link,
-  RouteComponentProps,
-} from 'react-router-dom';
-import classNames from 'classnames';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 
 const bannerImg = require('../../assets/images/Photo by Xianjuan HU on Unsplash.png'); // eslint-disable-line @typescript-eslint/no-var-requires
-const brandImg = require('../../assets/images/Group 167.png'); // eslint-disable-line @typescript-eslint/no-var-requires
+const brandImg = require('../../assets/images/Group 167@2x.png'); // eslint-disable-line @typescript-eslint/no-var-requires
 
-const useStyles = makeStyles((theme): Record<'root' | 'leftPanel' | 'leftPanelWrapper'
-| 'bannerImg' | 'titleContent' | 'fieldName' | 'fieldValue' | 'paymentAmountContainer' | 'paymentAmount'
-| 'paymentTypeContainer' | 'paymentType' | 'imgContainer', CSSProperties | (() => CSSProperties)> => createStyles({
+const useStyles = makeStyles((theme): Record<'root' | 'centerPanel' | 'bannerImg'
+| 'imgContainer' | 'infoContainer' | 'paymentSuccessful' | 'paymentAmountContainer'
+| 'paymentInfo' | 'redirectContainer'
+, CSSProperties | (() => CSSProperties)> => createStyles({
   root: {
     width: '100%',
     minHeight: '100vh',
-    backgroundColor: '#343434',
-  },
-  leftPanel: {
     backgroundColor: '#A8D574',
   },
-  leftPanelWrapper: {
-    paddingTop: 56,
-    paddingLeft: 136,
+  centerPanel: {
+    backgroundColor: '#A8D574',
   },
   bannerImg: {
     width: '100%',
@@ -35,148 +26,89 @@ const useStyles = makeStyles((theme): Record<'root' | 'leftPanel' | 'leftPanelWr
     backgroundSize: 'cover',
     backgroundPosition: 'center',
   },
-  titleContent: {
-    fontSize: 40,
+  imgContainer: {
+    width: '100%',
+    paddingTop: 56,
+    paddingLeft: 120,
     paddingBottom: 24,
   },
-  fieldName: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    paddingTop: 8,
-    paddingBottom: 8,
+  infoContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
-  fieldValue: {
-    fontSize: 24,
+  paymentSuccessful: {
+    marginTop: 8,
+    marginBottom: 48,
+    fontSize: 40,
     fontWeight: 'lighter',
-    paddingBottom: 16,
   },
   paymentAmountContainer: {
     paddingTop: 16,
-    paddingBottom: 16,
+    paddingBottom: 32,
+    fontSize: 30,
+    fontWeight: 'bold',
   },
-  paymentAmount: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    paddingRight: 64,
-    [theme.breakpoints.down('sm')]: {
-      paddingRight: 0,
-    },
-    '& > span:nth-child(1)': {
-      fontSize: 36,
+  paymentInfo: {
+    paddingTop: 16,
+    textAlign: 'center',
+    '& div:nth-child(2n + 1)': {
+      paddingBottom: 8,
+      fontSize: 18,
       fontWeight: 'bold',
-      paddingRight: 16,
     },
-    '& > span:nth-child(2)': {
+    '& div:nth-child(2n + 2)': {
+      paddingBottom: 32,
       fontSize: 24,
     },
   },
-  paymentTypeContainer: {
-    paddingTop: 16,
-    paddingBottom: 16,
-  },
-  paymentType: {
-    '& > div': {
-      height: 90,
-      marginBottom: 16,
-      marginRight: 48,
-      paddingLeft: 32,
-      backgroundColor: '#F0F0F0',
-      [theme.breakpoints.down('sm')]: {
-        marginRight: 0,
-      },
-      '&.active': {
-        marginRight: 0,
-        backgroundColor: '#343434',
-        '& > a': {
-          color: '#FFFFFF',
-        },
-      },
-      '& > a': {
-        display: 'flex',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        width: '100%',
-        height: '100%',
-        color: '#707070',
-        textDecoration: 'none',
-      },
-      '& > a:hover': {
-        textDecoration: 'underline',
-      },
-      '& > a > span:nth-child(1)': {
-        fontSize: 28,
-      },
-      '& > a > span:nth-child(2)': {
-        paddingLeft: 16,
-        fontSize: 12,
-      },
-    },
-  },
-  imgContainer: {
-    paddingTop: 48,
-    paddingLeft: 48,
-    paddingBottom: 24,
+  redirectContainer: {
+    paddingTop: 56,
+    paddingBottom: 56,
+    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: 'bold',
+    lineHeight: '64px',
   },
 }));
 
-export default function Router(props: RouteComponentProps): JSX.Element {
+export default function Router(): JSX.Element {
   const classes = useStyles();
 
   return (
-    <HashRouter>
-      <div className={classes.root}>
-        <Container>
-          <Grid container>
-            <Grid item xs={12} sm={12} className={classes.leftPanel}>
-              <div className={classes.bannerImg}></div>
+    <div className={classes.root}>
+      <Container>
+        <Grid container>
+          <Grid item xs={12} sm={12} className={classes.centerPanel}>
+            <div className={classes.bannerImg}></div>
 
-              <div className={classes.leftPanelWrapper}>
-                <div className={classes.titleContent}>訂單資訊</div>
-                <div className={classes.fieldName}>商店名稱</div>
-                <div className={classes.fieldValue}>Amazing 3C online Shop</div>
-                <div className={classes.fieldName}>訂單編號</div>
-                <div className={classes.fieldValue}>239234dwnd321</div>
-
-                <div className={classes.paymentAmountContainer}>
-                  <div className={classes.fieldName}>本筆訂單將支付</div>
-                  <div className={classes.paymentAmount}>
-                    <span>{(1250).toLocaleString()}</span>
-                    <span>元</span>
-                  </div>
-                </div>
-
-                <div className={classes.paymentTypeContainer}>
-                  <div className={classes.fieldName}>支付方式</div>
-                  <div className={classes.paymentType}>
-                    <div className={classNames({ active: props.location.pathname === '/payment/creditCard' })}>
-                      <Link to="/payment/creditCard">
-                        <span>信用卡</span>
-                      </Link>
-                    </div>
-                    <div className={classNames({ active: props.location.pathname === '/payment/atm' })}>
-                      <Link to="/payment/atm">
-                        <span>網路ATM</span>
-                        <span>(晶片讀卡機轉帳)</span>
-                      </Link>
-                    </div>
-                    <div className={classNames({ active: props.location.pathname === '/payment/entity' })}>
-                      <Link to="/payment/entity">
-                        <span>ATM櫃員機</span>
-                        <span>(實體ATM及網銀)</span>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className={classes.infoContainer}>
 
               <div className={classes.imgContainer}>
                 <img src={brandImg} alt="payment" />
               </div>
-            </Grid>
+
+              <h3 className={classes.paymentSuccessful}>付款成功</h3>
+
+              <div className={classes.paymentAmountContainer}>您已支付 {(1250).toLocaleString()} 元</div>
+
+              <div className={classes.paymentInfo}>
+                <div>商店名稱</div>
+                <div>Amazing 3C online Shop</div>
+                <div>訂單編號</div>
+                <div>239234dwnd321</div>
+                <div>支付方式</div>
+                <div>信用卡付款</div>
+              </div>
+
+              <div className={classes.redirectContainer}>
+                <div>畫面將自動轉回</div>
+                <div>Amazing 3C Online Shop</div>
+              </div>
+            </div>
           </Grid>
-        </Container>
-      </div>
-    </HashRouter>
+        </Grid>
+      </Container>
+    </div>
   );
 }
