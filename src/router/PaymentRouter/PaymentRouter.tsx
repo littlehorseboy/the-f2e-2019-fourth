@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme): Record<'fade' | 'root' | 'leftPanel' | 'le
 | 'bannerImg' | 'titleContent' | 'fieldName' | 'fieldValue' | 'paymentAmountContainer' | 'paymentAmount'
 | 'paymentTypeContainer' | 'paymentType' | 'imgContainer', CSSProperties | (() => CSSProperties)> => createStyles({
   fade: {
-    transition: 'opacity 0.7s ease-in',
+    transition: 'opacity 0.5s ease-in',
     '&-enter': {
       opacity: 0,
     },
@@ -201,7 +201,7 @@ export default function Router(props: RouteComponentProps): JSX.Element {
                     <CSSTransition
                       in={match !== null}
                       timeout={{
-                        enter: 400,
+                        enter: 500,
                         exit: 300,
                       }}
                       classNames={classes.fade}
