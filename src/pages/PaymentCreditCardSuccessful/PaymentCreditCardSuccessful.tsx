@@ -29,8 +29,12 @@ const useStyles = makeStyles((theme): Record<'root' | 'centerPanel' | 'bannerImg
   imgContainer: {
     width: '100%',
     paddingTop: 56,
-    paddingLeft: 120,
     paddingBottom: 24,
+    paddingLeft: 120,
+    [theme.breakpoints.down('md')]: {
+      paddingLeft: 0,
+      textAlign: 'center',
+    },
   },
   infoContainer: {
     display: 'flex',

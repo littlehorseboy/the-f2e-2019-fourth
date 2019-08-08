@@ -106,6 +106,9 @@ const useStyles = makeStyles((theme): Record<'root' | 'title' | 'iconContainer'
   textFieldTwoContainer: {
     display: 'flex',
     justifyContent: 'space-between',
+    [theme.breakpoints.down('md')]: {
+      flexDirection: 'column',
+    },
   },
   cellPhoneNumberHelperText: {
     color: '#FFD065',

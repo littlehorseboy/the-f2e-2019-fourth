@@ -68,9 +68,9 @@ function PaymentAtm(props: PropsI): JSX.Element {
   const handleFormSubmit = (): void => {
     alert('功能尚未實裝');
 
-    if (selectedBank) {
-      props.history.push('/successful/payment/creditCard');
-    }
+    // if (selectedBank) {
+    //   props.history.push('/successful/payment/creditCard');
+    // }
   };
 
   return (
