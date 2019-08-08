@@ -4,8 +4,6 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2018,
-    sourceType: 'module',
     project: './tsconfig.json',
     tsconfigRootDir: './',
   },
@@ -25,9 +23,9 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
     'airbnb',
+    'plugin:@typescript-eslint/recommended',
   ],
   rules: {
-    'linebreak-style': ['error', 'windows'],
     'react/jsx-uses-react': 'error',
     'react/jsx-uses-vars': 'error',
     'react/jsx-filename-extension': [1, { extensions: ['.jsx', '.tsx'] }],
@@ -36,11 +34,9 @@ module.exports = {
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/indent': ['error', 2],
+    'linebreak-style': ['error', 'windows'],
   },
   settings: {
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx'],
-    },
     'import/resolver': {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
