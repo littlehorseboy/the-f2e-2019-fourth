@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import H from 'history';
 import MaskedInput from 'react-text-mask';
-import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import SvgIcon from '@material-ui/core/SvgIcon';
@@ -18,8 +17,8 @@ function CreditCardNumberTextMask(props: TextMaskProps): JSX.Element {
   return (
     <MaskedInput
       {...other}
-      ref={(ref: any): void => {
-        inputRef(ref ? ref.inputElement : null);
+      ref={(ref: MaskedInput): void => {
+        inputRef((ref) ? ref.inputElement as HTMLInputElement : null);
       }}
       mask={[
         /[1-9]/, /\d/, /\d/, /\d/, ' ', '-', ' ',
@@ -39,8 +38,8 @@ function MMYYTextMask(props: TextMaskProps): JSX.Element {
   return (
     <MaskedInput
       {...other}
-      ref={(ref: any): void => {
-        inputRef(ref ? ref.inputElement : null);
+      ref={(ref: MaskedInput): void => {
+        inputRef(ref ? ref.inputElement as HTMLInputElement : null);
       }}
       mask={[/[0-1]/, /\d/, ' ', '/', ' ', /\d/, /\d/]}
       placeholderChar={'\u2000'}
@@ -172,14 +171,14 @@ function PaymentCreditCard(props: PropsI): JSX.Element {
     if (formFields.creditCardNumber.replace(/ /g, '').replace(/-/g, '').trim().length === 0) {
       creditCardNumber = [...creditCardNumber, '必填欄位'];
     }
-    if (!formFields.creditCardNumber.replace(/ /g, '').replace(/-/g, '').match(/^\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d\d$/g)) {
+    if (!formFields.creditCardNumber.replace(/ /g, '').replace(/-/g, '').match(/^\d{16}$/g)) {
       creditCardNumber = [...creditCardNumber, '信用卡卡號填寫格式錯誤，需有 16 碼'];
     }
     let MMYY: string[] = [];
     if (formFields.MMYY.replace(/ /g, '').replace(/\//g, '').trim().length === 0) {
       MMYY = [...MMYY, '必填欄位'];
     }
-    if (!formFields.MMYY.replace(/ /g, '').replace(/\//g, '').match(/^\d\d\d\d$/g)) {
+    if (!formFields.MMYY.replace(/ /g, '').replace(/\//g, '').match(/^\d{4}$/g)) {
       MMYY = [...MMYY, '有效月年填寫格式錯誤，需有 4 碼'];
     }
     if (!formFields.MMYY.replace(/ /g, '').split('/')[0].match(/^01|02|03|04|05|06|07|08|09|10|11|12$/g)) {
@@ -189,14 +188,14 @@ function PaymentCreditCard(props: PropsI): JSX.Element {
     if (formFields.securityCode.length === 0) {
       securityCode = [...securityCode, '必填欄位'];
     }
-    if (!formFields.securityCode.match(/^\d\d\d$/g)) {
+    if (!formFields.securityCode.match(/^\d{3}$/g)) {
       securityCode = [...securityCode, '信用卡背面末三碼填寫格式錯誤，需有 3 個數字'];
     }
     let cellPhoneNumber: string[] = [];
     if (formFields.cellPhoneNumber.length === 0) {
       cellPhoneNumber = [...cellPhoneNumber, '必填欄位'];
     }
-    if (!formFields.cellPhoneNumber.match(/^\d\d\d\d\d\d\d\d\d\d$/g)) {
+    if (!formFields.cellPhoneNumber.match(/^\d{10}$/g)) {
       cellPhoneNumber = [...cellPhoneNumber, '手機號碼填寫格式錯誤，需有 10 個數字'];
     }
 
