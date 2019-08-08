@@ -33,10 +33,7 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.jsx', '.tsx'] }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
-    'linebreak-style': [
-      'error',
-      'windows'
-    ],
+    'linebreak-style': ['error', 'windows'],
     '@typescript-eslint/indent': ['error', 2],
   },
   settings: {
