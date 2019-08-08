@@ -181,7 +181,7 @@ function PaymentCreditCard(props: PropsI): JSX.Element {
     if (!formFields.MMYY.replace(/ /g, '').replace(/\//g, '').match(/^\d{4}$/g)) {
       MMYY = [...MMYY, '有效月年填寫格式錯誤，需有 4 碼'];
     }
-    if (!formFields.MMYY.replace(/ /g, '').split('/')[0].match(/^01|02|03|04|05|06|07|08|09|10|11|12$/g)) {
+    if (!formFields.MMYY.replace(/ /g, '').split('/')[0].match(/^01$|^02$|^03$|^04$|^05$|^06$|^07$|^08$|^09$|^10$|^11$|^12$/g)) {
       MMYY = [...MMYY, '月填寫格式錯誤，範圍為 01 ~ 12'];
     }
     let securityCode: string[] = [];
