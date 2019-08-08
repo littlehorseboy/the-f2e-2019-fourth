@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import TextField from '@material-ui/core/TextField';
+import { CSSProperties } from '@material-ui/core/styles/withStyles';
 
 interface TextMaskProps {
   inputRef: (ref: HTMLInputElement | null) => void;
@@ -48,10 +49,16 @@ function MMYYTextMask(props: TextMaskProps): JSX.Element {
   );
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme): Record<'root' | 'title' | 'iconContainer'
+| 'formContainer' | 'textField' | 'textFieldTwoContainer' | 'cellPhoneNumberHelperText'
+| 'buttonContainer' | 'button', CSSProperties | (() => CSSProperties)> => ({
   root: {
     paddingTop: 144,
     paddingLeft: 88,
+    [theme.breakpoints.down('md')]: {
+      paddingLeft: 24,
+      paddingRight: 24,
+    },
   },
   title: {
     color: '#FFFFFF',
@@ -115,7 +122,7 @@ const useStyles = makeStyles({
     fontWeight: 'bold',
     width: 257,
   },
-});
+}));
 
 interface FormField {
   name: string;

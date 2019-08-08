@@ -4,11 +4,18 @@ import H from 'history';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import { CSSProperties } from '@material-ui/core/styles/withStyles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme): Record<'root' | 'title' | 'subTitle'
+| 'bankButton' | 'bankHelperText' | 'buttonContainer' | 'button'
+, CSSProperties | (() => CSSProperties)> => ({
   root: {
     paddingTop: 144,
     paddingLeft: 88,
+    [theme.breakpoints.down('md')]: {
+      paddingLeft: 24,
+      paddingRight: 24,
+    },
   },
   title: {
     color: '#FFFFFF',
@@ -38,6 +45,7 @@ const useStyles = makeStyles({
   },
   buttonContainer: {
     paddingTop: 56,
+    paddingBottom: 16,
     textAlign: 'center',
   },
   button: {
@@ -46,7 +54,7 @@ const useStyles = makeStyles({
     fontWeight: 'bold',
     width: 257,
   },
-});
+}));
 
 interface PropsI {
   history: H.History;
@@ -58,6 +66,8 @@ function PaymentAtm(props: PropsI): JSX.Element {
   const [selectedBank, setSelectedBank] = useState('');
 
   const handleFormSubmit = (): void => {
+    alert('功能尚未實裝');
+
     if (selectedBank) {
       props.history.push('/successful/payment/creditCard');
     }

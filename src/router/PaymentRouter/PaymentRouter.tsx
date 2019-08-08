@@ -20,6 +20,7 @@ const brandImg = require('../../assets/images/Group 167.png'); // eslint-disable
 const routes = [
   { path: '/payment/creditCard', name: 'paymentCreditCard', Component: PaymentCreditCard },
   { path: '/payment/atm', name: 'PaymentAtm', Component: PaymentAtm },
+  { path: '/payment/entity', name: 'PaymentEntity', Component: PaymentAtm },
 ];
 
 const useStyles = makeStyles((theme): Record<'fade' | 'root' | 'leftPanel' | 'leftPanelWrapper'
@@ -51,6 +52,10 @@ const useStyles = makeStyles((theme): Record<'fade' | 'root' | 'leftPanel' | 'le
   leftPanelWrapper: {
     paddingTop: 56,
     paddingLeft: 136,
+    [theme.breakpoints.down('md')]: {
+      paddingLeft: 32,
+      paddingRight: 32,
+    },
   },
   bannerImg: {
     width: '100%',
@@ -107,6 +112,12 @@ const useStyles = makeStyles((theme): Record<'fade' | 'root' | 'leftPanel' | 'le
       },
       '&.active': {
         marginRight: 0,
+        [theme.breakpoints.down('md')]: {
+          marginRight: 48,
+        },
+        [theme.breakpoints.down('sm')]: {
+          marginRight: 0,
+        },
         backgroundColor: '#343434',
         '& > a': {
           color: '#FFFFFF',
@@ -150,7 +161,7 @@ export default function Router(props: RouteComponentProps): JSX.Element {
       <div className={classes.root}>
         <Container>
           <Grid container>
-            <Grid item xs={12} sm={5} className={classes.leftPanel}>
+            <Grid item xs={12} lg={5} className={classes.leftPanel}>
               <img src={bannerImg} alt="payment" className={classes.bannerImg} />
 
               <div className={classes.leftPanelWrapper}>
@@ -197,7 +208,7 @@ export default function Router(props: RouteComponentProps): JSX.Element {
               </div>
             </Grid>
 
-            <Grid item xs={12} sm={7}>
+            <Grid item xs={12} lg={7}>
               {routes.map(({ path, Component }): JSX.Element => (
                 <Route key={path} exact path={path}>
                   {({ match }): JSX.Element => (
