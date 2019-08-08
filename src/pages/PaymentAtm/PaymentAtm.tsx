@@ -82,7 +82,9 @@ function PaymentAtm(props: PropsI): JSX.Element {
               variant="outlined"
               color={selectedBank === bank ? 'primary' : 'default'}
               fullWidth
-            >{bank}</Button>
+            >
+              {bank}
+            </Button>
           </Grid>
         ))}
       </Grid>

@@ -17,9 +17,9 @@ export default function Router(): JSX.Element {
   return (
     <HashRouter>
       <div className={classes.page}>
-        <Route exact path='/' component={PaymentCreditCard} />
-        <Route path='/successful/payment/creditCard' component={PaymentCreditCardSuccessful} />
-        <Route path='/payment' component={PaymentRouter} />
+        <Route exact path="/" component={PaymentCreditCard} />
+        <Route path="/successful/payment/creditCard" component={PaymentCreditCardSuccessful} />
+        <Route path="/payment" component={PaymentRouter} />
       </div>
     </HashRouter>
   );

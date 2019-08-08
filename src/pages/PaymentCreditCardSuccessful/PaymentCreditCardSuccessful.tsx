@@ -80,7 +80,7 @@ export default function Router(): JSX.Element {
       <Container>
         <Grid container>
           <Grid item xs={12} sm={12} className={classes.centerPanel}>
-            <div className={classes.bannerImg}></div>
+            <div className={classes.bannerImg} />
 
             <div className={classes.infoContainer}>
 
@@ -90,7 +90,11 @@ export default function Router(): JSX.Element {
 
               <h3 className={classes.paymentSuccessful}>付款成功</h3>
 
-              <div className={classes.paymentAmountContainer}>您已支付 {(1250).toLocaleString()} 元</div>
+              <div className={classes.paymentAmountContainer}>
+                您已支付
+                {(1250).toLocaleString()}
+                元
+              </div>
 
               <div className={classes.paymentInfo}>
                 <div>商店名稱</div>

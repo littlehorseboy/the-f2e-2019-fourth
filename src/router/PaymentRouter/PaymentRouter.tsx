@@ -143,6 +143,8 @@ const useStyles = makeStyles((theme): Record<'fade' | 'root' | 'leftPanel' | 'le
 export default function Router(props: RouteComponentProps): JSX.Element {
   const classes = useStyles();
 
+  const { location } = props;
+
   return (
     <HashRouter>
       <div className={classes.root}>
@@ -169,18 +171,18 @@ export default function Router(props: RouteComponentProps): JSX.Element {
                 <div className={classes.paymentTypeContainer}>
                   <div className={classes.fieldName}>支付方式</div>
                   <div className={classes.paymentType}>
-                    <div className={classNames({ active: props.location.pathname === '/payment/creditCard' })}>
+                    <div className={classNames({ active: location.pathname === '/payment/creditCard' })}>
                       <Link to="/payment/creditCard">
                         <span>信用卡</span>
                       </Link>
                     </div>
-                    <div className={classNames({ active: props.location.pathname === '/payment/atm' })}>
+                    <div className={classNames({ active: location.pathname === '/payment/atm' })}>
                       <Link to="/payment/atm">
                         <span>網路ATM</span>
                         <span>(晶片讀卡機轉帳)</span>
                       </Link>
                     </div>
-                    <div className={classNames({ active: props.location.pathname === '/payment/entity' })}>
+                    <div className={classNames({ active: location.pathname === '/payment/entity' })}>
                       <Link to="/payment/entity">
                         <span>ATM櫃員機</span>
                         <span>(實體ATM及網銀)</span>
