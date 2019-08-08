@@ -18,8 +18,8 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:jsx-a11y/recommended',
-    'airbnb',
     'plugin:@typescript-eslint/recommended',
+    'airbnb',
   ],
   plugins: [
     'react',
