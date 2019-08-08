@@ -14,29 +14,33 @@ module.exports = {
     es6: true,
     jest: true,
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'airbnb',
-  ],
   plugins: [
     'react',
     'jsx-a11y',
     'react-hooks',
     '@typescript-eslint',
   ],
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:jsx-a11y/recommended',
+    'airbnb',
+  ],
   rules: {
+    'linebreak-style': ['error', 'windows'],
     'react/jsx-uses-react': 'error',
     'react/jsx-uses-vars': 'error',
     'react/jsx-filename-extension': [1, { extensions: ['.jsx', '.tsx'] }],
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
-    'linebreak-style': ['error', 'windows'],
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/indent': ['error', 2],
   },
   settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
     'import/resolver': {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
